@@ -1,0 +1,45 @@
+doctype html
+html
+  head
+    title Nightlife Coordination App
+    link(rel='stylesheet', href='libs/bootstrap-3.3.7/css/bootstrap.min.css', type='text/css')
+    link(rel= 'stylesheet', href= 'libs/font-awesome-4.7.0/css/font-awesome.min.css', type='text/css')
+    link(rel= 'stylesheet', href= 'libs/bootstrap-social-5.0.0/bootstrap-social.css', type='text/css')
+    link(rel='stylesheet', href='css/main.css', type='text/css')
+    script(src= 'common/ajax-functions.js', type='text/javascript', defer)
+    script(src='controllers/clickController.client.js', type='text/javascript', defer)
+  body
+  
+    .container
+        
+      header
+        if user
+          a.btn.btn-social.btn-github.btn-logout(href='/logout')
+            img(src=user.twitter.photo)
+            |  Logout
+        else
+          a.btn.btn-social.btn-twitter.btn-login(href='/auth/twitter')
+            span.fa.fa-twitter
+            |  Sign in with Twitter
+      
+        h1 Nightlife Coordination App
+      
+    
+      .row
+        .col-xs-offset-2.col-xs-8.col-sm-offset-3.col-sm-6.col-md-offset-4.col-md-4
+          .location-search
+            .input-group
+              input.form-control(type='search', name='location', placeholder='Place around the globe', value=location)
+              span.input-group-btn
+                input.btn.btn-default(type='button', value='Get Bars')
+      
+      .loadingIcon
+        i.fa.fa-cog.fa-spin.fa-3x.fa-fw
+           
+      .row
+        #barResults
+        
+      footer
+        p Runs with data provided by
+        a.btn.btn-default.btn-yelp(href='https://www.yelp.com', target='_blank')
+          img(src='img/yelp/logo-white.png')

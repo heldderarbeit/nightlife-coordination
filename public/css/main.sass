@@ -1,0 +1,106 @@
+/********* Fonts **********/
+
+@font-face
+  font-family: 'Yantramanav'
+  font-style: normal
+  font-weight: 400
+  src: local('Yantramanav'), local('Yantramanav-Regular'), url('../fonts/yantramanav.woff') format('woff')
+
+@font-face
+  font-family: 'Raleway'
+  font-style: normal
+  font-weight: 400
+  src: local('Raleway'), local('Raleway-Regular'), url('../fonts/raleway.woff') format('woff')
+
+@font-face
+  font-family: 'Montserrat'
+  font-style: normal
+  font-weight: 400
+  src: local('Montserrat-Regular'), url('../fonts/montserrat.woff') format('woff')
+
+$font-stack1: Yantramanav, Helvetica, sans-serif
+$font-stack2: Raleway, 'Helvetica Neue', Helvetica, sans-serif
+$font-stack3: Montserrat, Times, serif
+$font-stack4: Helvetica, sans-serif
+
+body
+  text-align: center
+
+header
+  .btn-social
+    margin-top: 10px
+    @media (max-width: 991px)
+      float: none
+    @media (min-width: 992px)
+      float: right
+  h1
+    font-family: $font-stack1
+    margin-top: 25px
+    clear: both
+  
+.location-search
+  font-family: $font-stack2
+  margin: 30px 0 20px
+  
+.loadingIcon
+  display: none
+  i
+    margin-top: 15px
+
+#barResults
+  .thumbnail > img
+    margin-top: 8px
+    width: 100px
+    height: 100px
+    
+  h2, .address
+    text-overflow: ellipsis
+    white-space: nowrap
+    overflow: hidden
+    
+  h2
+    font-family:  $font-stack1
+    font-size: 1.12em
+    
+  .rating
+    margin-top: -3px
+    img
+      margin: 0 2px
+      
+  .reviews
+    font-family:  $font-stack2
+    margin-top: 3px
+    
+  .address
+    font-family: $font-stack3
+
+  .address:nth-of-type(2)
+    margin-top: 13px
+    
+  .address:nth-of-type(3),
+  .address:nth-of-type(4)
+    margin-top: -10px
+    
+  .address:nth-of-type(5)
+    margin: -10px 0 15px
+    
+  .btn
+    font-size: 1em
+    
+  .my-btn-success
+    color: #336600
+    
+  .visits
+    font-family: $font-stack2
+    margin: 3px 0 -6px
+    
+footer
+  margin: 15px
+  visibility: hidden
+  p
+    font-family: $font-stack4
+    margin-bottom: 5px
+  .btn-yelp
+    padding: 0
+    img
+      width: 135px

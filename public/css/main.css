@@ -1,204 +1,88 @@
-/********* Fonts **********/
-
+/********* Fonts ********* */
 @font-face {
-  font-family: 'Roboto';
+  font-family: "Yantramanav";
   font-style: normal;
   font-weight: 400;
-  src: local('Roboto'), local('Roboto-Regular'), url('../fonts/Roboto-Regular.ttf') format('truetype');
-}
-
+  src: local("Yantramanav"), local("Yantramanav-Regular"), url("../fonts/yantramanav.woff") format("woff"); }
 @font-face {
-  font-family: 'Roboto';
+  font-family: "Raleway";
   font-style: normal;
-  font-weight: 500;
-  src: local('Roboto Medium'), local('Roboto-Medium'), url('../fonts/Roboto-Medium.ttf') format('truetype');
-}
-
-/****** Main Styling ******/
-
+  font-weight: 400;
+  src: local("Raleway"), local("Raleway-Regular"), url("../fonts/raleway.woff") format("woff"); }
+@font-face {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Montserrat-Regular"), url("../fonts/montserrat.woff") format("woff"); }
 body {
-	font-family: 'Roboto', sans-serif;
-	font-size: 16px;
-	margin: 0;
-	padding: 0;
-}
+  text-align: center; }
 
-header {
-	color: #00BCD4;
-	height: 56px;
-	margin: 0 0 14px 0;
-	text-align: center;
-}
+header .btn-social {
+  margin-top: 10px; }
+  @media (max-width: 991px) {
+    header .btn-social {
+      float: none; } }
+  @media (min-width: 992px) {
+    header .btn-social {
+      float: right; } }
+header h1 {
+  font-family: Yantramanav, Helvetica, sans-serif;
+  margin-top: 25px;
+  clear: both; }
 
-p {
-	margin: 8px 0 0 0;
-}
+.location-search {
+  font-family: Raleway, "Helvetica Neue", Helvetica, sans-serif;
+  margin: 30px 0 20px; }
 
-.container p {
-	text-align: center;
-	padding: 0;
-}
+.loadingIcon {
+  display: none; }
+  .loadingIcon i {
+    margin-top: 15px; }
 
-/****** Header Styling ******/
+#barResults .thumbnail > img {
+  margin-top: 8px;
+  width: 100px;
+  height: 100px; }
+#barResults h2, #barResults .address {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden; }
+#barResults h2 {
+  font-family: Yantramanav, Helvetica, sans-serif;
+  font-size: 1.12em; }
+#barResults .rating {
+  margin-top: -3px; }
+  #barResults .rating img {
+    margin: 0 2px; }
+#barResults .reviews {
+  font-family: Raleway, "Helvetica Neue", Helvetica, sans-serif;
+  margin-top: 3px; }
+#barResults .address {
+  font-family: Montserrat, Times, serif; }
+#barResults .address:nth-of-type(2) {
+  margin-top: 13px; }
+#barResults .address:nth-of-type(3),
+#barResults .address:nth-of-type(4) {
+  margin-top: -10px; }
+#barResults .address:nth-of-type(5) {
+  margin: -10px 0 15px; }
+#barResults .btn {
+  font-size: 1em; }
+#barResults .my-btn-success {
+  color: #336600; }
+#barResults .visits {
+  font-family: Raleway, "Helvetica Neue", Helvetica, sans-serif;
+  margin: 3px 0 -6px; }
 
-header p {
-	margin: 16px 0 5px 0;
-}
+footer {
+  margin: 15px;
+  visibility: hidden; }
+  footer p {
+    font-family: Helvetica, sans-serif;
+    margin-bottom: 5px; }
+  footer .btn-yelp {
+    padding: 0; }
+    footer .btn-yelp img {
+      width: 135px; }
 
-.menu {
-	text-decoration: none;
-	padding: 6px;
-	margin: 0;
-	color: #727272;
-}
-
-.menu:visited {
-	color: #727272;
-}
-
-.menu:hover {
-	color: #FFA000;
-}
-
-.menu:active {
-	color: #FF630D;
-}
-
-header a ~ p {
-	margin: 0;
-	padding: 0;
-	display: inline;
-	color: #ECEFF1;
-}
-
-#display-name {
-	font-weight: 400;
-}
-
-/****** Login Styling ******/
-
-.login {
-	margin: 86px auto 0 auto;
-	text-align: center;
-}
-
-#login-btn {
-	width: 225px;
-	padding: 7px 5px;
-}
-
-.btn p {
-	margin: 8px 0 0 0;
-	padding: 0;
-}
-
-.btn > img {
-	float: left;
-	margin-left: 10px
-}
-
-/****** Logo Div Styling ******/
-
-img {
-	margin: 0 auto;
-	display: block;
-}
-
-.clementine-text { /* Styling for the Clementine.js text */
-	padding: 0;
-	margin: -25px 0 0 0;
-	font-weight: 500;
-	font-size: 60px;
-	color: #FFA000;
-}
-
-/****** Click Styling ******/
-
-.btn-container {	/* Styling for the div that contains the buttons */
-	margin: -10px auto 0 auto;
-	text-align: center;
-}
-
-.btn {	/* Styling for buttons */
-	margin: 0 8px;
-	color: white;
-	background-color: #00BCD4;
-	display: inline-block;
-	border: 0;
-	font-size: 14px;
-	border-radius: 3px;
-	padding: 10px 5px;
-	width: 100px;
-	font-weight: 500;
-}
-
-.btn:focus {	/* Remove outline when hovering over button */
-	outline: none;
-}
-
-.btn:active {	/* Scale the button down by 10% when clicking on button */
-	transform: scale(0.9, 0.9);
-	-webkit-transform: scale(0.9, 0.9);
-	-moz-transform: scale(0.9, 0.9);
-}
-
-.btn-delete {	/* Styling for delete button */
-	background-color: #ECEFF1;
-	color: #212121;
-}
-
-#click-nbr {
-	font-weight: 400;
-}
-
-/****** Profile Styling ******/
-
-.github-profile {
-	width: 350px;
-	height: 200px;
-	border-radius: 3px;
-	margin: 86px auto 0 auto;
-	background-color: #EEE;
-	text-align: center;
-	color: #000;
-}
-
-.github-profile p:first-child {
-	padding-top: 16px;
-}
-
-.github-profile p:nth-child(5) {
-	margin-bottom: 16px
-}
-
-.github-profile p {
-	margin: 0 0 0 16px;
-	text-align: left;
-}
-
-.profile-value {
-	font-weight: 400;
-}
-
-span {
-	font-weight: 500;
-}
-
-.github-profile > img {
-	padding-top: 16px;
-	margin-bottom: 16px;
-}
-
-.github-profile .menu:hover {
-	color: #FFA000;
-}
-
-.github-profile .menu:active {
-	color: #FF630D;
-}
-
-#menu-divide {
-	color: #FFFFFF;
-	display: inline;
-	margin: 0;
-}
+/*# sourceMappingURL=main.css.map */
