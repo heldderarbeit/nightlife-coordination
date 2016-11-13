@@ -166,14 +166,17 @@ function handleVisit (event) {
         
         ajaxFunctions.ajaxRequest('POST', visitBarUrl, function (nightlife) {
             
-            if (JSON.parse(nightlife).error) {
+            nightlife = JSON.parse(nightlife);
+            if (nightlife.error === 'not logged in') {
                 window.location.href = '/auth/twitter';
+            } else if (nightlife.error === 'could not update bar in the db') {
+                window.location.href = '/';
             } else {
                 event.target.classList.remove('btn-default', 'my-btn-success');
                 event.target.classList.add('btn-danger');
                 event.target.value = LEAVE_BAR_TEXT;
                 
-                setVisitsParagraph(visitsParagraph, JSON.parse(nightlife).visit_count);
+                setVisitsParagraph(visitsParagraph, nightlife.visit_count);
             }
         });    
     } else {
@@ -181,14 +184,17 @@ function handleVisit (event) {
         
         ajaxFunctions.ajaxRequest('POST', leaveBarUrl, function (nightlife) {
             
-            if (JSON.parse(nightlife).error) {
+            nightlife = JSON.parse(nightlife);
+            if (nightlife.error === 'not logged in') {
                 window.location.href = '/auth/twitter';
+            } else if (nightlife.error === 'could not update bar in the db') {
+                window.location.href = '/';
             } else {
                 event.target.classList.add('btn-default', 'my-btn-success');
                 event.target.classList.remove('btn-danger');
                 event.target.value = GO_BAR_TEXT;
                 
-                setVisitsParagraph(visitsParagraph, JSON.parse(nightlife).visit_count);
+                setVisitsParagraph(visitsParagraph, nightlife.visit_count);
             }
         });
     }

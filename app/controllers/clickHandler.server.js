@@ -80,7 +80,7 @@ function ClickHandler () {
 		
 		var id = req.params.id;
 		    
-		var query = { 'yelp.id': id };
+		var query = { 'yelp.id': id, 'nightlife.visitor_ids': { $ne: req.user.twitter.id } };
 		var update = {
 		    $addToSet: { 'nightlife.visitor_ids': req.user.twitter.id }, 
 			$inc: { 'nightlife.visit_count': 1 }
@@ -88,8 +88,12 @@ function ClickHandler () {
 	    	
 		Bar.
 			findOneAndUpdate(query, update, { new: true }, function (err, bar) {
-				if (err) console.error('could not update bar in the db:', err);
-                res.send(bar.nightlife);
+				if (bar) {
+					res.send(bar.nightlife);
+				} else {
+					if (err) console.error(err);
+                	res.send({ error: 'could not update bar in the db' });
+                }
 			});
 	};
 	
@@ -97,7 +101,7 @@ function ClickHandler () {
 		
 		var id = req.params.id;
 		    
-		var query = { 'yelp.id': id };
+		var query = { 'yelp.id': id, 'nightlife.visitor_ids': req.user.twitter.id };
 		var update = {
 			$pull: { 'nightlife.visitor_ids': req.user.twitter.id }, 
 			$inc: { 'nightlife.visit_count': -1 }
@@ -105,8 +109,12 @@ function ClickHandler () {
 	    	
 		Bar.
 			findOneAndUpdate(query, update, { new: true }, function (err, bar) {
-				if (err) console.error('could not update bar in the db:', err);
-                res.send(bar.nightlife);
+				if (bar) {
+					res.send(bar.nightlife);
+				} else {
+					if (err) console.error(err);
+                	res.send({ error: 'could not update bar in the db' });
+                }
 			});
 	};
 
