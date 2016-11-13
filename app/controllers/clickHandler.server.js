@@ -71,6 +71,7 @@ function ClickHandler () {
 			});
         })
         .catch(function (err) {
+        	console.error('could not search yelp:', err);
             res.send(err);
         });
 	};
