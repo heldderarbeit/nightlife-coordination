@@ -17,6 +17,9 @@
 body {
   text-align: center; }
 
+.btn:focus {
+  outline: 0 !important; }
+
 header .btn-social {
   margin-top: 10px; }
   @media (max-width: 991px) {
@@ -82,6 +85,8 @@ footer {
     margin-bottom: 5px; }
   footer .btn-yelp {
     padding: 0; }
+    footer .btn-yelp:focus {
+      background-color: white; }
     footer .btn-yelp img {
       width: 135px; }
 
