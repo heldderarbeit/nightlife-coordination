@@ -30,39 +30,36 @@ function ClickHandler () {
                 // lean() returns the result as a plain JS object 
                 // instead of a full model instance
                 Bar.findOne({ 'yelp.id': business.id }).lean().exec(function (err, bar) {
-                	if (err) callback('could not search the db');
+                    if (err) callback('could not search the db');
                 		
-                	if (bar) {
-                		
-                		bar['sessionUser'] = { isVisiting: false };
-                		if (req.isAuthenticated()) {
-						    for (var visitor_id of bar.nightlife.visitor_ids) {
-								if (visitor_id === req.user.twitter.id) {
-								    bar.sessionUser.isVisiting = true;
-								}								  	  	
-							}
-						}
-						foundBars.push(bar);
-						callback();
-						
-                	} else {
-                		
-                		var newBar = new Bar();
-				newBar.yelp.id = business.id;
-				newBar.yelp.name = business.name;
-				newBar.yelp.image_url = business.image_url || 'img/buildings/default.png';
-				newBar.yelp.rating = business.rating;
-				newBar.yelp.review_count = business.review_count;
-				newBar.yelp.display_address = business.location.display_address;
+                    if (bar) {
+                	bar['sessionUser'] = { isVisiting: false };
+                	if (req.isAuthenticated()) {
+			    for (var visitor_id of bar.nightlife.visitor_ids) {
+				if (visitor_id === req.user.twitter.id) {
+				    bar.sessionUser.isVisiting = true;
+			        }								  	  	
+			    }
+		        }
+			foundBars.push(bar);
+			callback();
+                    } else {
+                	var newBar = new Bar();
+			newBar.yelp.id = business.id;
+			newBar.yelp.name = business.name;
+			newBar.yelp.image_url = business.image_url || 'img/buildings/default.png';
+			newBar.yelp.rating = business.rating;
+			newBar.yelp.review_count = business.review_count;
+			newBar.yelp.display_address = business.location.display_address;
 							
-				newBar.save(function (err) {
-			            if (err) callback('could not insert bar in the db');
+			newBar.save(function (err) {
+			    if (err) callback('could not insert bar in the db');
 							    
-				    newBar = newBar.toObject();
-				    newBar['sessionUser'] = { isVisiting: false };
-				    foundBars.push(newBar);
-				    callback();
-			        });
+		                newBar = newBar.toObject();
+				newBar['sessionUser'] = { isVisiting: false };
+				foundBars.push(newBar);
+				callback();
+			    });
                         }
                 });
 	    }, function (err) {
@@ -78,43 +75,43 @@ function ClickHandler () {
 
     this.visitBar = function (req, res) {
 		
-		var id = req.params.id;
+	var id = req.params.id;
 		    
-		var query = { 'yelp.id': id, 'nightlife.visitor_ids': { $ne: req.user.twitter.id } };
-		var update = {
-		    $addToSet: { 'nightlife.visitor_ids': req.user.twitter.id }, 
-		    $inc: { 'nightlife.visit_count': 1 }
-		};
+	var query = { 'yelp.id': id, 'nightlife.visitor_ids': { $ne: req.user.twitter.id } };
+	var update = {
+ 	    $addToSet: { 'nightlife.visitor_ids': req.user.twitter.id }, 
+	    $inc: { 'nightlife.visit_count': 1 }
+	};
 	    	
-		Bar.findOneAndUpdate(query, update, { new: true }, function (err, bar) {
-		    if (bar) {
-			res.send(bar.nightlife);
-		    } else {
-			if (err) console.error(err);
-                        res.send({ error: 'could not update bar in the db' });
-                    }
-		});
+	Bar.findOneAndUpdate(query, update, { new: true }, function (err, bar) {
+   	    if (bar) {
+		res.send(bar.nightlife);
+	    } else {
+		if (err) console.error(err);
+                res.send({ error: 'could not update bar in the db' });
+            }
+	});
     };
 	
-	this.leaveBar = function (req, res) {
+    this.leaveBar = function (req, res) {
 		
-		var id = req.params.id;
+	var id = req.params.id;
 		    
-		var query = { 'yelp.id': id, 'nightlife.visitor_ids': req.user.twitter.id };
-		var update = {
-			$pull: { 'nightlife.visitor_ids': req.user.twitter.id }, 
-			$inc: { 'nightlife.visit_count': -1 }
-		};
-	    	
-		Bar.findOneAndUpdate(query, update, { new: true }, function (err, bar) {
-		    if (bar) {
-		        res.send(bar.nightlife);
-		    } else {
-		        if (err) console.error(err);
-                	res.send({ error: 'could not update bar in the db' });
-                    }
-		});
+	var query = { 'yelp.id': id, 'nightlife.visitor_ids': req.user.twitter.id };
+	var update = {
+	    $pull: { 'nightlife.visitor_ids': req.user.twitter.id }, 
+	    $inc: { 'nightlife.visit_count': -1 }
 	};
+	    	
+	Bar.findOneAndUpdate(query, update, { new: true }, function (err, bar) {
+            if (bar) {
+                res.send(bar.nightlife);
+            } else {
+		if (err) console.error(err);
+                res.send({ error: 'could not update bar in the db' });
+            }
+	});
+    };
 }
 
 module.exports = ClickHandler;
